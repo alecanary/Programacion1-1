@@ -16,7 +16,7 @@
       <TextField fx:id="fxml_minimo" layoutX="20.0" layoutY="93.0" prefHeight="25.0" prefWidth="61.0" promptText="minimo" />
       <TextField fx:id="fxml_maximo" layoutX="90.0" layoutY="93.0" prefHeight="25.0" prefWidth="61.0" promptText="maximo" />
       <TextArea fx:id="fxml_intentos" layoutX="120.0" layoutY="165.0" prefHeight="202.0" prefWidth="511.0" />
-      <Button layoutX="13.0" layoutY="210.0" mnemonicParsing="false" onAction="#manejaBotonJugar" text="PROBAR" />
+      <Button fx:id="fxml_btJugar" layoutX="13.0" layoutY="210.0" mnemonicParsing="false" onAction="#manejaBotonJugar" text="PROBAR" />
       <TextField fx:id="fxml_numeroJugar" layoutX="25.0" layoutY="165.0" prefHeight="25.0" prefWidth="52.0" />
       <Label fx:id="fxml_mensajes" layoutX="255.0" layoutY="96.0" prefHeight="25.0" prefWidth="229.0" textFill="#dd0404" />
       <Label layoutX="124.0" layoutY="14.0" prefHeight="68.0" prefWidth="454.0" text="ADIVINE EL NÚMERO" textAlignment="CENTER">
