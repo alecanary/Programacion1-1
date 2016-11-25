@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.Random;
 import java.util.Scanner;
 
+import javax.swing.text.StyledEditorKit.ForegroundAction;
+
 import modelo.Estudiante;
 import modelo.Intento;
 import modelo.Persona;
@@ -12,6 +14,7 @@ public class Ejercicios1 {
 
 	public static void main(String[] args) {
 		Ejercicios1 ej1 = new Ejercicios1();
+		int[][] datosEnteros = { { 3, 7, 1 }, { 1, 4, 7, 3 }, { 8 }, { 3, -7 } };
 
 		/*
 		 * for (int i=0; i < 100 ; i++) ej1.lanzarDado();
@@ -43,24 +46,67 @@ public class Ejercicios1 {
 		// Date(), 15, "20120901");
 
 		// ej1.adivinaNumero();
-		String[] nombres = { "Paco", "Carlos", "Maria", "Luis", "Fernando", "Isabel" };
+		// String[] nombres = { "Paco", "Carlos", "Maria", "Luis", "Fernando",
+		// "Isabel" };
 		// ej1.ordenaListaCadenas(nombres);
-		int[] numeros1 = { 123, 245, 378, 458, 23, 3, 46, 30, 50 };
-		int[] numeros2 = { 12, 25, 78, 45, 213, 34, 146 };
+		// int[] numeros1 = { 123, 245, 378, 458, 23, 3, 46, 30, 50 };
+		// int[] numeros2 = { 12, 25, 78, 45, 213, 34, 146 };
 
-		ej1.ordenaListaNumerosEnteros(numeros1);
-		ej1.ordenaListaNumerosEnteros(numeros2);
+		// ej1.ordenaListaNumerosEnteros(numeros1);
+		// ej1.ordenaListaNumerosEnteros(numeros2);
 
-		int[] numeros3 = ej1.mezclaArraysEnteros(numeros1, numeros2);
-		System.out.println("Mezcla terminada");
+		// int[] numeros3 = ej1.mezclaArraysEnteros(numeros1, numeros2);
+		// System.out.println("Mezcla terminada");
 
 		/*
-		 * boolean encontrado = ej1.busquedaBinaria(0, numeros1); if
-		 * (encontrado) System.out.println("Encontrado"); else
+		 * boolean encontrado = ej1.busquedaBinaria(0, numeros1); if(encontrado)
+		 * System.out.println("Encontrado"); else
 		 * System.out.println("No Encontrado");
 		 */
+		int[] sumaColumnas = ej1.sumaColumnasMatrizEnteros(datosEnteros);
+		System.out.println("Mezcla terminada");
+	}
+
+	public int[] sumaFilaMatrizEnteros(int[][] matriz) {
+		int[] resultado = new int[matriz.length];
+		for (int i = 0; i < matriz.length; i++) {
+			for (int j = 0; j < matriz[i].length; j++) {
+				resultado[i] += matriz[i][j];
+			}
+		}
+		return resultado;
+	}
+
+	public int[] sumaColumnasMatrizEnteros(int[][] matriz) {
+		int longitud = 0;
+
+		for (int i = 0; i < matriz.length; i++) {
+			if (matriz[i].length > longitud)
+				longitud = matriz[i].length;
+
+		}
+		int[] resultado = new int[longitud];
+		for (int j = 0; j < longitud; j++) {
+			for (int i = 0; i < matriz.length; i++) {
+				// try {
+				if (j < matriz[i].length)
+					resultado[j] += matriz[i][j];
+				// } catch (ArrayIndexOutOfBoundsException e) {
+				// System.out.println(i + ", " + j);
+
+				// }
+			}
+		}
+
+		return resultado;
 
 	}
+
+	/*
+	 * public int[] sumaMatrizEnteros(int[][] matriz) { int suma = 0; for (int i
+	 * = 0; i < matriz.length; i++) { for (int j = 0; j < matriz[i].length; j++)
+	 * { suma += matriz[i][j]; } } return null; }
+	 */
 
 	public int[] mezclaArraysEnteros(int[] a1, int[] a2) {
 		int[] a3 = new int[a1.length + a2.length];
