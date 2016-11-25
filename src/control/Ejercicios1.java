@@ -102,11 +102,15 @@ public class Ejercicios1 {
 
 	}
 
-	/*
-	 * public int[] sumaMatrizEnteros(int[][] matriz) { int suma = 0; for (int i
-	 * = 0; i < matriz.length; i++) { for (int j = 0; j < matriz[i].length; j++)
-	 * { suma += matriz[i][j]; } } return null; }
-	 */
+	public int sumaMatrizEnteros(int[][] matriz) {
+		int suma = 0;
+		for (int i = 0; i < matriz.length; i++) {
+			for (int j = 0; j < matriz[i].length; j++) {
+				suma += matriz[i][j];
+			}
+		}
+		return suma;
+	}
 
 	public int[] mezclaArraysEnteros(int[] a1, int[] a2) {
 		int[] a3 = new int[a1.length + a2.length];
