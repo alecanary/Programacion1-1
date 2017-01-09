@@ -63,8 +63,48 @@ public class Ejercicios1 {
 		 * System.out.println("Encontrado"); else
 		 * System.out.println("No Encontrado");
 		 */
-		int[] sumaColumnas = ej1.sumaColumnasMatrizEnteros(datosEnteros);
-		System.out.println("Mezcla terminada");
+		//int[] sumaColumnas = ej1.sumaColumnasMatrizEnteros(datosEnteros);
+		//System.out.println("Mezcla terminada");
+		
+		int saldoCuenta = 1500;
+		int [] movimientosBancarios= {321, -290, 489, -977, 2000, -1400, 100};
+		
+		int saldoFinal =ej1.calculaSaldoFinal(movimientosBancarios, saldoCuenta);
+		System.out.println("Consulta terminada");
+	}
+	
+	
+	
+	
+	public String[] ordenaListaCaracteres(String[] palabra) {
+		for (int i = 0; i < palabra.length - 1; i++) {
+			for (int j = i + 1; j < palabra.length; j++) {
+				if (palabra[i].compareTo(palabra[j]) > 0) // hay que permutar
+				{
+					String aux = palabra[i];
+					palabra[i] = palabra[j];
+					palabra[j] = aux;
+				}
+			}
+		}
+
+		 return palabra;
+
+	}
+	
+	
+	
+	
+	public int calculaSaldoFinal (int[] movimientoCuenta, int saldoInicial){
+		int saldoFinal =saldoInicial;
+		for (int i = 0; i < movimientoCuenta.length; i++) {
+			saldoFinal += movimientoCuenta[i];
+		}
+		
+		
+		
+		return saldoFinal;
+		
 	}
 
 	public int[] sumaFilaMatrizEnteros(int[][] matriz) {
