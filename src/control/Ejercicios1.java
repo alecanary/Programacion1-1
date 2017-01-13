@@ -13,63 +13,9 @@ import modelo.Persona;
 public class Ejercicios1 {
 
 	public static void main(String[] args) {
-		Ejercicios1 ej1 = new Ejercicios1();
-		int[][] datosEnteros = { { 3, 7, 1 }, { 1, 4, 7, 3 }, { 8 }, { 3, -7 } };
-
-		/*
-		 * for (int i=0; i < 100 ; i++) ej1.lanzarDado();
-		 */
-		// int x = 1000;//
-		// ej1.listaNPrimerosEnteros(x);
-		// ej1.bucleReloj();
-		// int x = 134;
-		// int y = 138;
-
-		// int resultado = ej1.sumaIntervalo(x, y);
-
-		// System.out.println(" Suma en intervalo " + x + ", " + y + " es " +
-		// resultado);
-		// int z = 50;
-		// ej1.fibonacci(z);
-		/*
-		 * int cuantasLanzadas = 500; int[] salida =
-		 * ej1.lanzadas(cuantasLanzadas); ej1.mostrarLanzadas(salida,
-		 * cuantasLanzadas);
-		 */
-		// int numero = 7771;
-		// ej1.listarPrimos(100);
-		// ej1.crearHebras(3);
-
-		// crear un objeto de la clase Estudiante
-
-		// Estudiante est1 = new Estudiante("43452345L", "Carlos", 'M', new
-		// Date(), 15, "20120901");
-
-		// ej1.adivinaNumero();
-		// String[] nombres = { "Paco", "Carlos", "Maria", "Luis", "Fernando",
-		// "Isabel" };
-		// ej1.ordenaListaCadenas(nombres);
-		// int[] numeros1 = { 123, 245, 378, 458, 23, 3, 46, 30, 50 };
-		// int[] numeros2 = { 12, 25, 78, 45, 213, 34, 146 };
-
-		// ej1.ordenaListaNumerosEnteros(numeros1);
-		// ej1.ordenaListaNumerosEnteros(numeros2);
-
-		// int[] numeros3 = ej1.mezclaArraysEnteros(numeros1, numeros2);
-		// System.out.println("Mezcla terminada");
-
-		/*
-		 * boolean encontrado = ej1.busquedaBinaria(0, numeros1); if(encontrado)
-		 * System.out.println("Encontrado"); else
-		 * System.out.println("No Encontrado");
-		 */
-		//int[] sumaColumnas = ej1.sumaColumnasMatrizEnteros(datosEnteros);
-		//System.out.println("Mezcla terminada");
-		
-		int saldoCuenta = 1500;
-		int [] movimientosBancarios= {321, -290, 489, -977, 2000, -1400, 100};
-		
-		int saldoFinal =ej1.calculaSaldoFinal(movimientosBancarios, saldoCuenta);
+		Ejercicios2 ej2 = new Ejercicios2();
+		ej2.insertarEnPersonas();
+		ej2.recorrerListaPersonas();
 		System.out.println("Consulta terminada");
 	}
 	
@@ -364,13 +310,13 @@ public class Ejercicios1 {
 
 	public void creaListaPersonas() {
 		// crea 3 personas
-		Persona p1 = new Persona("45627812K", "Carlos", 'M', new Date());
+		Persona p1 = new Persona("45627812K", "Carlos", 'M', "19830323");
 		Persona p2 = new Persona();
 		p2.setNif("44321987H");
 		p2.setNombre("Maria");
 		p2.setSexo('F');
 
-		Persona p3 = new Persona("41298730L", "Felipe", 'M', new Date());
+		Persona p3 = new Persona("41298730L", "Felipe", 'M', "19761203");
 
 		// define el array para 20 personas
 		Persona[] listaPersonas = new Persona[20];

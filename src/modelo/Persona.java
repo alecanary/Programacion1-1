@@ -2,14 +2,16 @@ package modelo;
 
 import java.util.Date;
 
-public class Persona {
+import control.Humano;
+
+public class Persona implements Humano {
 
 	private String nif;
 	private String nombre;
 	private char sexo; 
-	private Date fecha;
+	private String fecha;
 	
-	public Persona(String nif, String nombre, char sexo, Date fecha) {
+	public Persona(String nif, String nombre, char sexo, String fecha) {
 	    super();
 		this.nif = nif;
 		this.nombre = nombre;
@@ -22,7 +24,7 @@ public class Persona {
 		this.nif = "123456789K";
 		this.nombre = "anonimo";
 		this.sexo = 'M';
-		this.fecha = new Date();
+		this.fecha = "19930623";
 		// TODO Auto-generated constructor stub
 	}
 
@@ -38,7 +40,7 @@ public class Persona {
 		this.sexo = sexo;
 	}
 
-	public void setFecha(Date fecha) {
+	public void setFecha(String fecha) {
 		this.fecha = fecha;
 	}
 
@@ -54,7 +56,20 @@ public class Persona {
 		return sexo;
 	}
 
-	public Date getFecha() {
+	public String getFecha() {
 		return fecha;
+	}
+
+	@Override
+	public void caminar(int numPasos) {
+		// TODO Auto-generated method stub
+		System.out.println("caminando " + numPasos + "pasos" );
+
+	}
+
+	@Override
+	public int dormir(int numHoras) {
+		// TODO Auto-generated method stub
+		return numHoras;
 	}
 }
