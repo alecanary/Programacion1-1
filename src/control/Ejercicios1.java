@@ -15,7 +15,8 @@ public class Ejercicios1 {
 	public static void main(String[] args) {
 		Ejercicios2 ej2 = new Ejercicios2();
 		ej2.insertarEnPersonas();
-		//ej2.recorrerListaPersonas3();
+		//ej2.recorrerMatrizPersonas();
+		ej2.convertirArrayEnArrayList();
 		System.out.println("Consulta terminada");
 	}
 	
