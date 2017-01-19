@@ -16,7 +16,9 @@ public class Ejercicios1 {
 		Ejercicios2 ej2 = new Ejercicios2();
 		ej2.insertarEnPersonas();
 		//ej2.recorrerMatrizPersonas();
-		ej2.convertirArrayEnArrayList();
+		//ej2.convertirArrayEnArrayList();
+		ej2.pruebaMapaPersonas();
+		ej2.recorrerMapa();
 		System.out.println("Consulta terminada");
 	}
 	
