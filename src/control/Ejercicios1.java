@@ -11,20 +11,76 @@ import modelo.Intento;
 import modelo.Persona;
 
 public class Ejercicios1 {
+	private Scanner teclado= new Scanner(System.in);
 
 	public static void main(String[] args) {
-		Ejercicios2 ej2 = new Ejercicios2();
-		ej2.insertarEnPersonas();
-		//ej2.recorrerMatrizPersonas();
-		//ej2.convertirArrayEnArrayList();
-		ej2.pruebaMapaPersonas();
-		ej2.recorrerMapa();
-		System.out.println("Consulta terminada");
+		// Ejercicios2 ej2 = new Ejercicios2();
+		// ej2.insertarEnPersonas();
+		// ej2.recorrerListaPersonas2();
+		// ej2.recorrerMatrizPersonas();
+		// ej2.convertirArrayEnArrayList();
+		// ej2.pruebaMapaPersonas();
+		// ej2.recorrerMapa();
+		Ejercicios1 ej1 = new Ejercicios1();
+		ej1.menu("\t  MANTENIMIENTO DE PERSONAS");
+		System.out.println("FIN DEL MANTENIMIENTO.");
+	}
+
+	public void menu(String titulo) {
+		 Ejercicios2 ej2 = new Ejercicios2();
+		 ej2.insertarEnPersonas();
+		for (;;) {
+			System.out.println(titulo);
+			System.out.println("\t\t1. Listar todas las personas");
+			System.out.println("\t\t2. Crear una persona");
+			System.out.println("\t\t3. Modificar datos de una persona");
+			System.out.println("\t\t4. Borrar una personas");
+			System.out.println("\t\t0. Salir del programa");
+			
+			String tecleado = teclado.nextLine();
+			try {
+				int opcion = Integer.parseInt(tecleado);
+				switch (opcion) {
+				case 1:
+					ej2.recorrerListaPersonas2();
+					//listarTodos();
+					break;
+				case 2:
+					crearPersona();
+					break;
+				case 3:
+					modificarPersona();
+					break;
+				case 4:
+					borrarPersona();
+					break;
+				case 0:
+					return;
+
+				default:
+					break;
+				}
+			} catch (NumberFormatException e) {
+
+			}
+			// salida del break
+		}
+
 	}
 	
-	
-	
-	
+	public void listarTodos(){
+		System.out.println("\t Listar todas las personas");
+	}
+	public void crearPersona(){
+		System.out.println("\t CrearPersonas");
+	}
+	public void modificarPersona(){
+		System.out.println("\t modificarPersona");
+	}
+	public void borrarPersona(){
+		System.out.println("\t borrarPersona");
+	}
+
 	public String[] ordenaListaCaracteres(String[] palabra) {
 		for (int i = 0; i < palabra.length - 1; i++) {
 			for (int j = i + 1; j < palabra.length; j++) {
@@ -37,23 +93,18 @@ public class Ejercicios1 {
 			}
 		}
 
-		 return palabra;
+		return palabra;
 
 	}
-	
-	
-	
-	
-	public int calculaSaldoFinal (int[] movimientoCuenta, int saldoInicial){
-		int saldoFinal =saldoInicial;
+
+	public int calculaSaldoFinal(int[] movimientoCuenta, int saldoInicial) {
+		int saldoFinal = saldoInicial;
 		for (int i = 0; i < movimientoCuenta.length; i++) {
 			saldoFinal += movimientoCuenta[i];
 		}
-		
-		
-		
+
 		return saldoFinal;
-		
+
 	}
 
 	public int[] sumaFilaMatrizEnteros(int[][] matriz) {
@@ -313,13 +364,13 @@ public class Ejercicios1 {
 
 	public void creaListaPersonas() {
 		// crea 3 personas
-		Persona p1 = new Persona("45627812K", "Carlos", 'M', "19830323");
+		Persona p1 = new Persona("45627812K", "Carlos", 'M', 19830323);
 		Persona p2 = new Persona();
 		p2.setNif("44321987H");
 		p2.setNombre("Maria");
 		p2.setSexo('F');
 
-		Persona p3 = new Persona("41298730L", "Felipe", 'M', "19761203");
+		Persona p3 = new Persona("41298730L", "Felipe", 'M', 19761203);
 
 		// define el array para 20 personas
 		Persona[] listaPersonas = new Persona[20];

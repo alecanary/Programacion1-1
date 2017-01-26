@@ -1,18 +1,16 @@
 package modelo;
 
-import java.util.Date;
-
 import control.Humano;
 
-public class Persona implements Humano {
+public class Persona implements Humano, Comparable {
 
 	private String nif;
 	private String nombre;
-	private char sexo; 
-	private String fecha;
-	
-	public Persona(String nif, String nombre, char sexo, String fecha) {
-	    super();
+	private char sexo;
+	private int fecha;
+
+	public Persona(String nif, String nombre, char sexo, int fecha) {
+		super();
 		this.nif = nif;
 		this.nombre = nombre;
 		this.sexo = sexo;
@@ -24,7 +22,7 @@ public class Persona implements Humano {
 		this.nif = "123456789K";
 		this.nombre = "anonimo";
 		this.sexo = 'M';
-		this.fecha = "19930623";
+		this.fecha = 19930623;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -40,7 +38,7 @@ public class Persona implements Humano {
 		this.sexo = sexo;
 	}
 
-	public void setFecha(String fecha) {
+	public void setFecha(int fecha) {
 		this.fecha = fecha;
 	}
 
@@ -56,14 +54,14 @@ public class Persona implements Humano {
 		return sexo;
 	}
 
-	public String getFecha() {
+	public int getFecha() {
 		return fecha;
 	}
 
 	@Override
 	public void caminar(int numPasos) {
 		// TODO Auto-generated method stub
-		System.out.println("caminando " + numPasos + "pasos" );
+		System.out.println("caminando " + numPasos + "pasos");
 
 	}
 
@@ -72,4 +70,38 @@ public class Persona implements Humano {
 		// TODO Auto-generated method stub
 		return numHoras;
 	}
+
+	/*@Override
+	public int compareTo(Object persona) {
+		if (this.nombre.length() > ((Persona) persona).getNombre().length())
+			return 1;
+		else if (this.nombre.length() > ((Persona) persona).getNombre().length())
+			return -1;
+
+		return 0;
+	}*/
+	
+	/*@Override
+	public int compareTo(Object o) {
+		Persona p = (Persona) o;
+		//return this.nombre.compareTo(p.getNombre());
+		 if( this.fecha > p.getFecha())
+		  return 1;
+		 else if( this.fecha < p.getFecha())
+			  return -1;
+			 return 0;
+	}*/
+	
+	@Override
+	public int compareTo(Object o) {
+		Persona p = (Persona) o;
+		//return this.nombre.compareTo(p.getNombre());
+		 if( this.sexo > p.getSexo())
+		  return -1;
+		 else if( this.sexo < p.getSexo())
+			  return 1;
+			 return 0;
+	}
+	
+	
 }

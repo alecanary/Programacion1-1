@@ -10,7 +10,7 @@ import modelo.Persona;
 
 public class Ejercicios2 {
 
-	HashMap<String, Persona> mPersonas= new HashMap<String, Persona>();
+	HashMap<String, Persona> mPersonas = new HashMap<String, Persona>();
 
 	private ArrayList<String> cadenas = new ArrayList<String>();
 	private ArrayList<Persona> personas = new ArrayList<Persona>();
@@ -18,39 +18,36 @@ public class Ejercicios2 {
 
 	private ArrayList<ArrayList<Persona>> matrizPersonas = new ArrayList<ArrayList<Persona>>();
 
-	
-	
-	public void pruebaMapaPersonas(){
-		mPersonas.put("4321243245R", new Persona("4321243245R", "Lucas", 'M', "18991111"));
+	public void pruebaMapaPersonas() {
+		mPersonas.put("4321243245R", new Persona("4321243245R", "Lucas", 'M', 18991111));
 		Persona p = new Persona();
 		p.setNif("765431345T");
 		p.setNombre("Daniel");
 		p.setSexo('F');
-		p.setFecha("20000621");
+		p.setFecha(20000621);
 		mPersonas.put(p.getNif(), p);
 		mPersonas.put(" ", new Persona());
 	}
-	
-	public void recorrerMapa(){
-		//obtenemos las claves del hashmap
+
+	public void recorrerMapa() {
+		// obtenemos las claves del hashmap
 		System.out.println("numero de elementos : " + mPersonas.size());
 		Set<String> claves = mPersonas.keySet();
-		for (String clave:claves) {
+		for (String clave : claves) {
 			System.out.println(clave + " => " + mPersonas.get(clave).getNombre());
 		}
 	}
-	
-	public void buscarEnMapa(String[] nifs){
-		for (String nif: nifs){
-			if(mPersonas.containsKey(nif))
+
+	public void buscarEnMapa(String[] nifs) {
+		for (String nif : nifs) {
+			if (mPersonas.containsKey(nif))
 				System.out.println("existe nif : " + nif);
 			else
 				System.out.println("no existe nif : " + nif);
 
-				
 		}
 	}
-	
+
 	public void insertarEnCadenas() {
 		cadenas.add("Paco");
 		cadenas.add("Juan");
@@ -60,19 +57,24 @@ public class Ejercicios2 {
 	}
 
 	public void insertarEnPersonas() {
-		Persona p1 = new Persona("45343352F", "Pedro", 'M', "19930623");
+		Persona p1 = new Persona("45343352F", "Pedro", 'M', 19930623);
 		personas.add(p1);
 
-		personas.add(new Persona("45777352X", "Maria", 'F', "19980929"));
-		personas.add(null);
+		personas.add(new Persona("45777352X", "Maria", 'F', 19980929));
+		// personas.add(null);
 		//////////////////////////// añadir entre pedro y maria
-		personas.add(1, new Persona("45777300L", "Juan", 'M', "19981229"));
+		personas.add(1, new Persona("45777300L", "Juan", 'M', 19911229));
 
 		//////////////////////////////// borrar a pedro
 		// personas.remove(0);
 
 		//////////////////////////// cambiar a Juan por Paco
-		personas.set(0, new Persona("45777300L", "Paco", 'M', "19981229"));
+		personas.set(0, new Persona("45777300L", "Paco", 'M', 19981229));
+
+		////////////////////////// Añadir a otra persona
+		personas.add(new Persona("45777350G", "Alicia", 'F', 19920219));
+
+		personas.sort(null);
 
 		///////////////////////////// Convertir un ArrayList a array
 		/*
@@ -82,10 +84,10 @@ public class Ejercicios2 {
 		 */
 
 		// Inicializar la matriz de personas
-		personasFila2.add(new Persona("45700000Q", "Jorge", 'M', "19780109"));
-		personasFila2.add(new Persona("45745670M", "Luisa", 'F', "20000111"));
-		personasFila2.add(new Persona("45745987I", "Fran", 'M', "19990611"));
-		personasFila2.add(new Persona("45741234B", "Tina", 'F', "20121212"));
+		personasFila2.add(new Persona("45700000Q", "Jorge", 'M', 19780109));
+		personasFila2.add(new Persona("45745670M", "Luisa", 'F', 20000111));
+		personasFila2.add(new Persona("45745987I", "Fran", 'M', 19990611));
+		personasFila2.add(new Persona("45741234B", "Tina", 'F', 20121212));
 
 		matrizPersonas.add(personas);
 		matrizPersonas.add(personasFila2);
@@ -106,8 +108,8 @@ public class Ejercicios2 {
 	}
 
 	public void convertirArrayEnArrayList() {
-		Persona[] personas = { new Persona("45745987I", "Fran", 'M', "19990611"),
-				new Persona("45741234B", "Tina", 'F', "20121212"), null };
+		Persona[] personas = { new Persona("45745987I", "Fran", 'M', 19990611),
+				new Persona("45741234B", "Tina", 'F', 20121212), null };
 
 		this.personas = new ArrayList<Persona>(Arrays.asList(personas));
 		System.out.println("DEBUG");
@@ -120,7 +122,12 @@ public class Ejercicios2 {
 
 	public void recorrerListaPersonas2() { // bucle abreviado
 		for (Persona persona : personas)
-			System.out.println(persona.getNombre());
+			if (persona != null) {
+				System.out.println(persona.getNombre() + ", FechaNac: " + persona.getFecha() + ", sexo: " + persona.getSexo());
+
+			} else
+				System.out.println("Aqui hay un null");
+
 	}
 
 	public void recorrerListaPersonas3() { // con un iterador
