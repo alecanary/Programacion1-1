@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Scanner;
 import java.util.Set;
 
 import modelo.Persona;
@@ -17,6 +18,55 @@ public class Ejercicios2 {
 	private ArrayList<Persona> personasFila2 = new ArrayList<Persona>();
 
 	private ArrayList<ArrayList<Persona>> matrizPersonas = new ArrayList<ArrayList<Persona>>();
+	private Scanner teclado = new Scanner(System.in);
+	private boolean error = true;
+
+	public String validaNif(String nif) {
+		return nif;
+	}
+
+	public char validaSexo(String sexo) {
+		return 'F';
+	}
+
+	public int validaFecha(String fecha) {
+		return 0;
+	}
+
+	public void crearPersona() {
+		do { // lectura por teclado y validacion de los datos
+			
+			error = false;
+			System.out.println("Introduzca datos de la nueva persona(nif#nombre#sexo(M|F)#fecha), o q|Q para volver");
+			String tecleado = teclado.nextLine();
+			String[] campos = tecleado.split("#");
+			if (campos.length != 4){
+				System.out.println("NUMERO DE PARAMETROS DEBE SER 4 \n");
+				error = true;
+				continue;
+			}
+			if (validaNif(campos[0]).equals("") || 
+					validaSexo(campos[2]) == 0 || 
+					validaFecha(campos[3]) == -1) // hay al menos un error
+			{
+				error = true;
+				System.out.println("HAY AL MENOS 1 DATO ERRONEO");
+
+			}
+			else // datos validos
+			{
+				crearPersonaInsertarLista(tecleado);
+			}
+		} while (error);
+		System.out.println("DATOS CORRECTOS, SE CREA EL OBJETO Y SE AÑADE...");
+
+		// Crear objeto persona con los datos validados.
+		// lo añadimos al final a la lista
+	}
+
+	private void crearPersonaInsertarLista(String tecleado) {
+
+	}
 
 	public void pruebaMapaPersonas() {
 		mPersonas.put("4321243245R", new Persona("4321243245R", "Lucas", 'M', 18991111));
@@ -123,7 +173,8 @@ public class Ejercicios2 {
 	public void recorrerListaPersonas2() { // bucle abreviado
 		for (Persona persona : personas)
 			if (persona != null) {
-				System.out.println(persona.getNombre() + ", FechaNac: " + persona.getFecha() + ", sexo: " + persona.getSexo());
+				System.out.println(
+						persona.getNombre() + ", FechaNac: " + persona.getFecha() + ", sexo: " + persona.getSexo());
 
 			} else
 				System.out.println("Aqui hay un null");

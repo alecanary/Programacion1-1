@@ -46,7 +46,7 @@ public class Ejercicios1 {
 					//listarTodos();
 					break;
 				case 2:
-					crearPersona();
+					ej2.crearPersona();
 					break;
 				case 3:
 					modificarPersona();
@@ -71,9 +71,7 @@ public class Ejercicios1 {
 	public void listarTodos(){
 		System.out.println("\t Listar todas las personas");
 	}
-	public void crearPersona(){
-		System.out.println("\t CrearPersonas");
-	}
+	
 	public void modificarPersona(){
 		System.out.println("\t modificarPersona");
 	}
