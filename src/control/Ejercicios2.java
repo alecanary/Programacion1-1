@@ -7,6 +7,8 @@ import java.util.Iterator;
 import java.util.Scanner;
 import java.util.Set;
 
+import com.sun.javafx.scene.traversal.SubSceneTraversalEngine;
+
 import modelo.Persona;
 
 public class Ejercicios2 {
@@ -22,38 +24,76 @@ public class Ejercicios2 {
 	private boolean error = true;
 
 	public String validaNif(String nif) {
+		// Criterios de validacion del nif
+		// tener 9 caracteres
+
+		// los 8 primeros deben ser numeros y el ultimo caracter una letra
+		if (!nif.matches("[0-9]{8}[a-zA-Z]{1}")) {
+			System.out.println("NIF erroneo");
+			return "";
+		}
+		// la letra debe obtenerse a partir de un algoritmo en funcion de los
+		// digitos
+		else if (!validaLetraNif(nif)) {
+			System.out.println("NIF erroneo, letra mal");
+			return "";
+		}
+
 		return nif;
 	}
 
+	private boolean validaLetraNif(String nif) {
+		// extraer y convertir el numero del nif
+		// extraer la letra
+		int numeroNif = Integer.parseInt(nif.substring(0, 8));
+		char letraNif = nif.substring(8).toUpperCase().charAt(0);
+
+		String NIF_STRING_ASOCIATION = "TRWAGMYFPDXBNJZSQVHLCKE";
+		if (NIF_STRING_ASOCIATION.charAt(numeroNif % 23) == letraNif) {
+			return true;
+		}
+		return false;
+	}
+
 	public char validaSexo(String sexo) {
-		return 'F';
+		if (sexo.length() != 1 || !sexo.matches("[mMfF]")) {
+			System.out.println("Sexo incorrecto");
+			return 0;
+		}
+
+		return sexo.charAt(0);
 	}
 
 	public int validaFecha(String fecha) {
+		//validar AAAA posterior a 1900 y anterior a la actualidad
+		//MM entre 01 y 12
+		//DD depende del mes
+		
 		return 0;
 	}
 
 	public void crearPersona() {
 		do { // lectura por teclado y validacion de los datos
-			
+
 			error = false;
 			System.out.println("Introduzca datos de la nueva persona(nif#nombre#sexo(M|F)#fecha), o q|Q para volver");
 			String tecleado = teclado.nextLine();
 			String[] campos = tecleado.split("#");
-			if (campos.length != 4){
+			if (campos.length != 4) {
 				System.out.println("NUMERO DE PARAMETROS DEBE SER 4 \n");
 				error = true;
 				continue;
 			}
-			if (validaNif(campos[0]).equals("") || 
-					validaSexo(campos[2]) == 0 || 
-					validaFecha(campos[3]) == -1) // hay al menos un error
+			if (validaNif(campos[0]).equals("") || validaSexo(campos[2]) == 0 || validaFecha(campos[3]) == -1) // hay
+																												// al
+																												// menos
+																												// un
+																												// error
 			{
 				error = true;
 				System.out.println("HAY AL MENOS 1 DATO ERRONEO");
 
-			}
-			else // datos validos
+			} else // datos validos
 			{
 				crearPersonaInsertarLista(tecleado);
 			}
@@ -171,10 +211,11 @@ public class Ejercicios2 {
 	}
 
 	public void recorrerListaPersonas2() { // bucle abreviado
+		System.out.println("\tNIF \t\tNombre \t\t Fecha de Nacimiento \t Sexo");
 		for (Persona persona : personas)
 			if (persona != null) {
-				System.out.println(
-						persona.getNombre() + ", FechaNac: " + persona.getFecha() + ", sexo: " + persona.getSexo());
+				System.out.println("\t" + persona.getNif() + "\t" + persona.getNombre() + "\t\t  " + persona.getFecha()
+						+ "\t\t  " + persona.getSexo());
 
 			} else
 				System.out.println("Aqui hay un null");

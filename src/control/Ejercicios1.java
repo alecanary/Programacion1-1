@@ -43,7 +43,6 @@ public class Ejercicios1 {
 				switch (opcion) {
 				case 1:
 					ej2.recorrerListaPersonas2();
-					//listarTodos();
 					break;
 				case 2:
 					ej2.crearPersona();
@@ -68,9 +67,7 @@ public class Ejercicios1 {
 
 	}
 	
-	public void listarTodos(){
-		System.out.println("\t Listar todas las personas");
-	}
+	
 	
 	public void modificarPersona(){
 		System.out.println("\t modificarPersona");
