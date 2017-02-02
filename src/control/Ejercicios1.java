@@ -34,7 +34,7 @@ public class Ejercicios1 {
 			System.out.println("\t\t1. Listar todas las personas");
 			System.out.println("\t\t2. Crear una persona");
 			System.out.println("\t\t3. Modificar datos de una persona");
-			System.out.println("\t\t4. Borrar una personas");
+			System.out.println("\t\t4. Borrar una persona de la lista");
 			System.out.println("\t\t0. Salir del programa");
 			
 			String tecleado = teclado.nextLine();
@@ -51,7 +51,7 @@ public class Ejercicios1 {
 					modificarPersona();
 					break;
 				case 4:
-					borrarPersona();
+					ej2.borrarPersona();
 					break;
 				case 0:
 					return;
@@ -72,9 +72,7 @@ public class Ejercicios1 {
 	public void modificarPersona(){
 		System.out.println("\t modificarPersona");
 	}
-	public void borrarPersona(){
-		System.out.println("\t borrarPersona");
-	}
+	
 
 	public String[] ordenaListaCaracteres(String[] palabra) {
 		for (int i = 0; i < palabra.length - 1; i++) {

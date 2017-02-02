@@ -2,6 +2,7 @@ package control;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Scanner;
@@ -65,18 +66,58 @@ public class Ejercicios2 {
 	}
 
 	public int validaFecha(String fecha) {
-		//validar AAAA posterior a 1900 y anterior a la actualidad
-		//MM entre 01 y 12
-		//DD depende del mes
-		
-		return 0;
+		// validar AAAA posterior a 1900 y anterior a la actualidad
+		// MM entre 01 y 12
+		// DD depende del mes
+		int year, mes, dia;
+		int[] diasMes = { 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };
+		if (fecha.length() != 8)
+			return -1;
+		try {
+			year = Integer.parseInt(fecha.substring(4, 8));
+			mes = Integer.parseInt(fecha.substring(2, 4));
+			dia = Integer.parseInt(fecha.substring(0, 2));
+		} catch (NumberFormatException e) {
+			System.out.println("Formato de fecha INCORRECTO");
+			return -1;
+		}
+		if (mes < 1 || mes > 12)
+			return -1;
+		if (dia < 1 || dia > diasMes[mes - 1])
+			return -1;
+
+		Date fActual = new Date(); // fecha de hoy
+		Date fechaTecleada = new Date(year - 1900, mes, dia);
+		if (year < 1900 || fechaTecleada.after(fActual))
+			return -1;
+
+		return Integer.parseInt(fecha);
+	}
+
+	public void borrarPersona() {
+		String tecleado = null;
+		do { // lectura por teclado y validacion de los datos
+
+			try {
+				error = false;
+				System.out.println(
+						"Introduzca ID dela persona(1-"+personas.size()+") oq|Q para volver");
+				 tecleado = teclado.nextLine();
+				if(Integer.parseInt(tecleado)<1 || Integer.parseInt(tecleado)>personas.size())
+					error=true;
+			} catch (NumberFormatException e) {
+				error=true;
+			}
+		} while (error);
+		personas.remove(Integer.parseInt(tecleado)-1);
 	}
 
 	public void crearPersona() {
 		do { // lectura por teclado y validacion de los datos
 
 			error = false;
-			System.out.println("Introduzca datos de la nueva persona(nif#nombre#sexo(M|F)#fecha), o q|Q para volver");
+			System.out.println(
+					"Introduzca datos de la nueva persona(nif#nombre#sexo(M|F)#fecha(DDMMAAAA)), o q|Q para volver");
 			String tecleado = teclado.nextLine();
 			String[] campos = tecleado.split("#");
 			if (campos.length != 4) {
@@ -211,11 +252,12 @@ public class Ejercicios2 {
 	}
 
 	public void recorrerListaPersonas2() { // bucle abreviado
-		System.out.println("\tNIF \t\tNombre \t\t Fecha de Nacimiento \t Sexo");
+		System.out.println("\tID \tNIF \t\tNombre \t\t Fecha de Nacimiento \t Sexo");
+		int contador = 1;
 		for (Persona persona : personas)
 			if (persona != null) {
-				System.out.println("\t" + persona.getNif() + "\t" + persona.getNombre() + "\t\t  " + persona.getFecha()
-						+ "\t\t  " + persona.getSexo());
+				System.out.println("\t" + (contador++) + "\t" + persona.getNif() + "\t" + persona.getNombre() + "\t\t  "
+						+ persona.getFecha() + "\t\t  " + persona.getSexo());
 
 			} else
 				System.out.println("Aqui hay un null");
