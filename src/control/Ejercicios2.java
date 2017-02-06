@@ -94,22 +94,71 @@ public class Ejercicios2 {
 		return Integer.parseInt(fecha);
 	}
 
-	public void borrarPersona() {
-		String tecleado = null;
-		do { // lectura por teclado y validacion de los datos
+	public void borrarPersona() { // se valida el ID
 
+		String tecleado = null;
+		do { // lectura por teclado del id de la persona a borrar de la
+				// lista
 			try {
 				error = false;
-				System.out.println(
-						"Introduzca ID dela persona(1-"+personas.size()+") oq|Q para volver");
-				 tecleado = teclado.nextLine();
-				if(Integer.parseInt(tecleado)<1 || Integer.parseInt(tecleado)>personas.size())
-					error=true;
+				System.out.println("Introduzca ID de la persona (1-" + personas.size() + ") o q|Q para volver");
+				tecleado = teclado.nextLine();
+				if(tecleado.compareToIgnoreCase("q") ==0)
+					return;
+				if (Integer.parseInt(tecleado) < 1 || Integer.parseInt(tecleado) > personas.size())
+					error = true;
 			} catch (NumberFormatException e) {
-				error=true;
+				error = true;
 			}
 		} while (error);
-		personas.remove(Integer.parseInt(tecleado)-1);
+		// pedir confirmacion de borrado
+		System.out.println("¿Está realmente SEGURO  de eliminar de la lista a "
+				+ personas.get(Integer.parseInt(tecleado) - 1).getNombre() + "? (ENTER para confirmar)");
+
+		String borrarSiNo = teclado.nextLine();
+		System.out.println("tecleado : " + borrarSiNo);
+		if (borrarSiNo.equals("")) {
+			System.out
+					.println("Borrando a " + personas.get(Integer.parseInt(tecleado) - 1).getNombre() + " de la lista");
+			personas.remove(Integer.parseInt(tecleado) - 1);
+
+		} else
+			System.out.println("Eliminación cancelada por el usuario");
+	}
+
+	public void borrarPersonaNif() { // se valida el Nif
+
+		String tecleado = null;
+		do { // lectura por teclado del nif de la persona a borrar de la
+				// lista
+
+			error = false;
+			System.out.println("Introduzca NIF de la persona (xxxxxxxxZ) o q|Q para volver");
+			tecleado = teclado.nextLine();
+			if(tecleado.compareToIgnoreCase("q") ==0)
+				return;
+			if (validaNif(tecleado).equals(""))
+				error = true;
+
+		} while (error);
+
+		// ¿existe el nif en la lista?
+		if (existeEnLaListaNIF(tecleado)) {
+
+			System.out.println("¿Está realmente SEGURO  de eliminar de la lista a la persona cuyo NIF es "
+					+ tecleado + "? (ENTER para confirmar)");
+
+			String borrarSiNo = teclado.nextLine();
+			System.out.println("tecleado : " + borrarSiNo);
+			if (borrarSiNo.equals("")) {
+				System.out.println(
+						"Borrando a " + tecleado + " de la lista");
+				personas.remove(getIdFromNif(tecleado));
+
+			} else
+				System.out.println("Eliminación cancelada por el usuario");
+		}else
+			System.out.println("Este NIF no existe en la lista");
 	}
 
 	public void crearPersona() {
@@ -119,6 +168,8 @@ public class Ejercicios2 {
 			System.out.println(
 					"Introduzca datos de la nueva persona(nif#nombre#sexo(M|F)#fecha(DDMMAAAA)), o q|Q para volver");
 			String tecleado = teclado.nextLine();
+			if(tecleado.compareToIgnoreCase("q") ==0)
+				return;
 			String[] campos = tecleado.split("#");
 			if (campos.length != 4) {
 				System.out.println("NUMERO DE PARAMETROS DEBE SER 4 \n");
@@ -136,7 +187,10 @@ public class Ejercicios2 {
 
 			} else // datos validos
 			{
-				crearPersonaInsertarLista(tecleado);
+				if (!existeEnLaListaNIF(campos[0]))
+					crearPersonaInsertarLista(tecleado);
+				else
+					System.out.println("Alta duplicada Nif:" + campos[0]);
 			}
 		} while (error);
 		System.out.println("DATOS CORRECTOS, SE CREA EL OBJETO Y SE AÑADE...");
@@ -145,8 +199,29 @@ public class Ejercicios2 {
 		// lo añadimos al final a la lista
 	}
 
-	private void crearPersonaInsertarLista(String tecleado) {
+	public boolean existeEnLaListaNIF(String nif) {
 
+		for (Persona persona : personas) {
+			if (persona.getNif().equals(nif))
+				return true;
+
+		}
+		return false;
+	}
+	public int getIdFromNif(String nif){
+		for (int i = 0; i < personas.size(); i++) {
+			if(personas.get(i).getNif().compareToIgnoreCase(nif)==0)
+				return i;
+				
+		}
+		return 0;
+		
+	}
+
+	private void crearPersonaInsertarLista(String tecleado) {
+		String[] campos = tecleado.split("#");
+		Persona persona = new Persona(campos[0], campos[1], campos[2].charAt(0), Integer.parseInt(campos[3]));
+		personas.add(persona);
 	}
 
 	public void pruebaMapaPersonas() {
@@ -191,7 +266,7 @@ public class Ejercicios2 {
 		Persona p1 = new Persona("45343352F", "Pedro", 'M', 19930623);
 		personas.add(p1);
 
-		personas.add(new Persona("45777352X", "Maria", 'F', 19980929));
+		personas.add(new Persona("45343671E", "Maria", 'F', 19980929));
 		// personas.add(null);
 		//////////////////////////// añadir entre pedro y maria
 		personas.add(1, new Persona("45777300L", "Juan", 'M', 19911229));

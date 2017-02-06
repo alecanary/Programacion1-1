@@ -34,7 +34,8 @@ public class Ejercicios1 {
 			System.out.println("\t\t1. Listar todas las personas");
 			System.out.println("\t\t2. Crear una persona");
 			System.out.println("\t\t3. Modificar datos de una persona");
-			System.out.println("\t\t4. Borrar una persona de la lista");
+			System.out.println("\t\t4. Borrar una persona de la lista por ID");
+			System.out.println("\t\t5. Borrar una persona de la lista por NIF");
 			System.out.println("\t\t0. Salir del programa");
 			
 			String tecleado = teclado.nextLine();
@@ -52,6 +53,9 @@ public class Ejercicios1 {
 					break;
 				case 4:
 					ej2.borrarPersona();
+					break;
+				case 5:
+					ej2.borrarPersonaNif();
 					break;
 				case 0:
 					return;
