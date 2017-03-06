@@ -9,6 +9,11 @@ public class Persona implements Humano, Comparable {
 	private char sexo;
 	private int fecha;
 
+	@Override
+	public String toString() {
+		return nombre ;
+	}
+
 	public Persona(String nif, String nombre, char sexo, int fecha) {
 		super();
 		this.nif = nif;
@@ -71,37 +76,31 @@ public class Persona implements Humano, Comparable {
 		return numHoras;
 	}
 
-	/*@Override
-	public int compareTo(Object persona) {
-		if (this.nombre.length() > ((Persona) persona).getNombre().length())
-			return 1;
-		else if (this.nombre.length() > ((Persona) persona).getNombre().length())
-			return -1;
+	/*
+	 * @Override public int compareTo(Object persona) { if (this.nombre.length()
+	 * > ((Persona) persona).getNombre().length()) return 1; else if
+	 * (this.nombre.length() > ((Persona) persona).getNombre().length()) return
+	 * -1;
+	 * 
+	 * return 0; }
+	 */
 
-		return 0;
-	}*/
-	
-	/*@Override
-	public int compareTo(Object o) {
-		Persona p = (Persona) o;
-		//return this.nombre.compareTo(p.getNombre());
-		 if( this.fecha > p.getFecha())
-		  return 1;
-		 else if( this.fecha < p.getFecha())
-			  return -1;
-			 return 0;
-	}*/
-	
+	/*
+	 * @Override public int compareTo(Object o) { Persona p = (Persona) o;
+	 * //return this.nombre.compareTo(p.getNombre()); if( this.fecha >
+	 * p.getFecha()) return 1; else if( this.fecha < p.getFecha()) return -1;
+	 * return 0; }
+	 */
+
 	@Override
 	public int compareTo(Object o) {
 		Persona p = (Persona) o;
-		//return this.nombre.compareTo(p.getNombre());
-		 if( this.sexo > p.getSexo())
-		  return -1;
-		 else if( this.sexo < p.getSexo())
-			  return 1;
-			 return 0;
+		// return this.nombre.compareTo(p.getNombre());
+		if (this.sexo > p.getSexo())
+			return -1;
+		else if (this.sexo < p.getSexo())
+			return 1;
+		return 0;
 	}
-	
-	
+
 }

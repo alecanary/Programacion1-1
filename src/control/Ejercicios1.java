@@ -1,20 +1,26 @@
 package control;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Random;
 import java.util.Scanner;
 
-import javax.swing.text.StyledEditorKit.ForegroundAction;
-
-import modelo.Estudiante;
 import modelo.Intento;
 import modelo.Persona;
 
 public class Ejercicios1 {
-	private Scanner teclado= new Scanner(System.in);
+	private Scanner teclado = new Scanner(System.in);
 
 	public static void main(String[] args) {
-		// Ejercicios2 ej2 = new Ejercicios2();
+
+		Ejercicios2 ej2 = new Ejercicios2();
+		HashMap<String, Persona> hm = ej2.getmPersonas();
+
+		hm = ej2.crearMapaPersonas(ej2.getPersonas());
+		
+		System.out.println("HashMap creado."+ hm.size());
+		
+
 		// ej2.insertarEnPersonas();
 		// ej2.recorrerListaPersonas2();
 		// ej2.recorrerMatrizPersonas();
@@ -27,17 +33,17 @@ public class Ejercicios1 {
 	}
 
 	public void menu(String titulo) {
-		 Ejercicios2 ej2 = new Ejercicios2();
-		 ej2.insertarEnPersonas();
+		Ejercicios2 ej2 = new Ejercicios2();
+		ej2.insertarEnPersonas();
 		for (;;) {
 			System.out.println(titulo);
 			System.out.println("\t\t1. Listar todas las personas");
 			System.out.println("\t\t2. Crear una persona");
-			System.out.println("\t\t3. Modificar datos de una persona");
+			System.out.println("\t\t3. Modificar datos de una persona (NIF)");
 			System.out.println("\t\t4. Borrar una persona de la lista por ID");
 			System.out.println("\t\t5. Borrar una persona de la lista por NIF");
 			System.out.println("\t\t0. Salir del programa");
-			
+
 			String tecleado = teclado.nextLine();
 			try {
 				int opcion = Integer.parseInt(tecleado);
@@ -49,7 +55,7 @@ public class Ejercicios1 {
 					ej2.crearPersona();
 					break;
 				case 3:
-					modificarPersona();
+					ej2.modificarPersona();
 					break;
 				case 4:
 					ej2.borrarPersona();
@@ -70,13 +76,10 @@ public class Ejercicios1 {
 		}
 
 	}
-	
-	
-	
-	public void modificarPersona(){
+
+	public void modificarPersona() {
 		System.out.println("\t modificarPersona");
 	}
-	
 
 	public String[] ordenaListaCaracteres(String[] palabra) {
 		for (int i = 0; i < palabra.length - 1; i++) {

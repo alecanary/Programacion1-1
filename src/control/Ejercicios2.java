@@ -8,21 +8,58 @@ import java.util.Iterator;
 import java.util.Scanner;
 import java.util.Set;
 
-import com.sun.javafx.scene.traversal.SubSceneTraversalEngine;
-
 import modelo.Persona;
 
 public class Ejercicios2 {
 
-	HashMap<String, Persona> mPersonas = new HashMap<String, Persona>();
+	private HashMap<String, Persona> mPersonas = new HashMap<String, Persona>();
 
 	private ArrayList<String> cadenas = new ArrayList<String>();
+
 	private ArrayList<Persona> personas = new ArrayList<Persona>();
+
 	private ArrayList<Persona> personasFila2 = new ArrayList<Persona>();
 
 	private ArrayList<ArrayList<Persona>> matrizPersonas = new ArrayList<ArrayList<Persona>>();
 	private Scanner teclado = new Scanner(System.in);
 	private boolean error = true;
+
+	public void modificarPersona() {
+		do { // lectura por teclado y validacion de los datos
+
+			error = false;
+			System.out.println(
+					"Introduzca datos de la persona(nif#[nombre]#[sexo(M|F)]#[fecha(DDMMAAAA)]), o q|Q para volver");
+			String tecleado = teclado.nextLine();
+			if (tecleado.compareToIgnoreCase("q") == 0)
+				return;
+			String[] campos = tecleado.split("#");
+			if (campos.length < 2) {
+				System.out.println("NUMERO DE PARAMETROS DEBE SER AL MENOS 2 \n");
+				error = true;
+				continue;
+			}
+
+			if (existeEnLaListaNIF(campos[0])) {
+				modificarPersonaLista(campos[0]);
+				System.out.println("datos modificados");
+
+			} else {
+				System.out.println("NIF debe existir:" + campos[0]);
+				error = true;
+			}
+		} while (error);
+		System.out.println("DATOS CORRECTOS, SE modifica EL OBJETO...");
+
+		// Crear objeto persona con los datos validados.
+		// lo añadimos al final a la lista
+
+	}
+
+	private void modificarPersonaLista(String tecleado) {
+		System.out.println("modificando la persona de nif" + tecleado);
+
+	}
 
 	public String validaNif(String nif) {
 		// Criterios de validacion del nif
@@ -103,7 +140,7 @@ public class Ejercicios2 {
 				error = false;
 				System.out.println("Introduzca ID de la persona (1-" + personas.size() + ") o q|Q para volver");
 				tecleado = teclado.nextLine();
-				if(tecleado.compareToIgnoreCase("q") ==0)
+				if (tecleado.compareToIgnoreCase("q") == 0)
 					return;
 				if (Integer.parseInt(tecleado) < 1 || Integer.parseInt(tecleado) > personas.size())
 					error = true;
@@ -135,7 +172,7 @@ public class Ejercicios2 {
 			error = false;
 			System.out.println("Introduzca NIF de la persona (xxxxxxxxZ) o q|Q para volver");
 			tecleado = teclado.nextLine();
-			if(tecleado.compareToIgnoreCase("q") ==0)
+			if (tecleado.compareToIgnoreCase("q") == 0)
 				return;
 			if (validaNif(tecleado).equals(""))
 				error = true;
@@ -145,19 +182,18 @@ public class Ejercicios2 {
 		// ¿existe el nif en la lista?
 		if (existeEnLaListaNIF(tecleado)) {
 
-			System.out.println("¿Está realmente SEGURO  de eliminar de la lista a la persona cuyo NIF es "
-					+ tecleado + "? (ENTER para confirmar)");
+			System.out.println("¿Está realmente SEGURO  de eliminar de la lista a la persona cuyo NIF es " + tecleado
+					+ "? (ENTER para confirmar)");
 
 			String borrarSiNo = teclado.nextLine();
 			System.out.println("tecleado : " + borrarSiNo);
 			if (borrarSiNo.equals("")) {
-				System.out.println(
-						"Borrando a " + tecleado + " de la lista");
+				System.out.println("Borrando a " + tecleado + " de la lista");
 				personas.remove(getIdFromNif(tecleado));
 
 			} else
 				System.out.println("Eliminación cancelada por el usuario");
-		}else
+		} else
 			System.out.println("Este NIF no existe en la lista");
 	}
 
@@ -168,7 +204,7 @@ public class Ejercicios2 {
 			System.out.println(
 					"Introduzca datos de la nueva persona(nif#nombre#sexo(M|F)#fecha(DDMMAAAA)), o q|Q para volver");
 			String tecleado = teclado.nextLine();
-			if(tecleado.compareToIgnoreCase("q") ==0)
+			if (tecleado.compareToIgnoreCase("q") == 0)
 				return;
 			String[] campos = tecleado.split("#");
 			if (campos.length != 4) {
@@ -208,20 +244,32 @@ public class Ejercicios2 {
 		}
 		return false;
 	}
-	public int getIdFromNif(String nif){
+
+	public int getIdFromNif(String nif) {
 		for (int i = 0; i < personas.size(); i++) {
-			if(personas.get(i).getNif().compareToIgnoreCase(nif)==0)
+			if (personas.get(i).getNif().compareToIgnoreCase(nif) == 0)
 				return i;
-				
+
 		}
 		return 0;
-		
+
 	}
 
 	private void crearPersonaInsertarLista(String tecleado) {
 		String[] campos = tecleado.split("#");
 		Persona persona = new Persona(campos[0], campos[1], campos[2].charAt(0), Integer.parseInt(campos[3]));
 		personas.add(persona);
+	}
+
+	public HashMap<String, Persona> crearMapaPersonas(ArrayList<Persona> miLista) {
+		HashMap<String, Persona> mPersonas2 = new HashMap<String, Persona>();
+		for (Persona persona : miLista) {
+			mPersonas2.put(persona.getNif(), persona);
+
+		}
+
+		return mPersonas2;
+
 	}
 
 	public void pruebaMapaPersonas() {
@@ -363,6 +411,10 @@ public class Ejercicios2 {
 
 	public void setPersonas(ArrayList<Persona> personas) {
 		this.personas = personas;
+	}
+
+	public HashMap<String, Persona> getmPersonas() {
+		return mPersonas;
 	}
 
 }
