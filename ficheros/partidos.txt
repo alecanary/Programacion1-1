@@ -1,0 +1,6 @@
+UDLP#2#RMAD#1#null
+BCNA#2#UDLP#4#null
+RMAD#3#BCNA#1#null
+RMAD#3#UDLP#3#null
+UDLP#2#BCNA#1#null
+BCNA#2#RMAD#2#null

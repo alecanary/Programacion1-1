@@ -1,18 +1,20 @@
 package modelo;
 
+import java.util.Date;
+
 import control.Humano;
 
 public class Persona implements Humano, Comparable {
 
 	private String nif;
+	@Override
+	public String toString() {
+		return nif;
+	}
+
 	private String nombre;
 	private char sexo;
 	private int fecha;
-
-	@Override
-	public String toString() {
-		return nombre ;
-	}
 
 	public Persona(String nif, String nombre, char sexo, int fecha) {
 		super();
@@ -27,7 +29,7 @@ public class Persona implements Humano, Comparable {
 		this.nif = "123456789K";
 		this.nombre = "anonimo";
 		this.sexo = 'M';
-		this.fecha = 19930623;
+		this.fecha = 20000101;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -66,8 +68,7 @@ public class Persona implements Humano, Comparable {
 	@Override
 	public void caminar(int numPasos) {
 		// TODO Auto-generated method stub
-		System.out.println("caminando " + numPasos + "pasos");
-
+		System.out.println("Caminando " + numPasos + " pasos");
 	}
 
 	@Override
@@ -77,30 +78,20 @@ public class Persona implements Humano, Comparable {
 	}
 
 	/*
-	 * @Override public int compareTo(Object persona) { if (this.nombre.length()
-	 * > ((Persona) persona).getNombre().length()) return 1; else if
-	 * (this.nombre.length() > ((Persona) persona).getNombre().length()) return
-	 * -1;
-	 * 
-	 * return 0; }
-	 */
-
-	/*
 	 * @Override public int compareTo(Object o) { Persona p = (Persona) o;
-	 * //return this.nombre.compareTo(p.getNombre()); if( this.fecha >
-	 * p.getFecha()) return 1; else if( this.fecha < p.getFecha()) return -1;
-	 * return 0; }
+	 * return this.nombre.compareTo(p.getNombre());
+	 * 
+	 * }
 	 */
 
 	@Override
-	public int compareTo(Object o) {
+	public int compareTo(Object o) { // por fechaNacimiento (int)
 		Persona p = (Persona) o;
-		// return this.nombre.compareTo(p.getNombre());
-		if (this.sexo > p.getSexo())
-			return -1;
-		else if (this.sexo < p.getSexo())
+		if (this.fecha > p.getFecha())
 			return 1;
-		return 0;
+		else if (this.fecha < p.getFecha())
+			return -1;
+		else
+			return 0;
 	}
-
 }

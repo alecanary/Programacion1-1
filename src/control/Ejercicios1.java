@@ -1,10 +1,12 @@
 package control;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Random;
 import java.util.Scanner;
 
+import modelo.Estudiante;
 import modelo.Intento;
 import modelo.Persona;
 
@@ -14,42 +16,79 @@ public class Ejercicios1 {
 	public static void main(String[] args) {
 
 		Ejercicios2 ej2 = new Ejercicios2();
+		ej2.insertarEnPersonas();
 		HashMap<String, Persona> hm = ej2.getmPersonas();
+		ej2.crearMapaPersonas(ej2.getPersonas());
 
-		hm = ej2.crearMapaPersonas(ej2.getPersonas());
-		
-		System.out.println("HashMap creado."+ hm.size());
-		
+		// System.out.println(hm.size());
 
-		// ej2.insertarEnPersonas();
-		// ej2.recorrerListaPersonas2();
-		// ej2.recorrerMatrizPersonas();
-		// ej2.convertirArrayEnArrayList();
-		// ej2.pruebaMapaPersonas();
-		// ej2.recorrerMapa();
 		Ejercicios1 ej1 = new Ejercicios1();
-		ej1.menu("\t  MANTENIMIENTO DE PERSONAS");
-		System.out.println("FIN DEL MANTENIMIENTO.");
+		ej1.menu("\t MANTENIMIENTO  DE PERSONAS\n");
+
+		System.out.println("FIN DEL PROGRAMA");
 	}
 
-	public void menu(String titulo) {
+	private void menu(String titulo) {
+		Ejercicios2 ej2 = new Ejercicios2();
+		// ej2.mediaEnterosFichero("ficheros/enteros.txt");
+		// ej2.escribirLanzamientosDadoFichero(1000);
+		// HashMap<String, ArrayList<Integer>> clasificacion =
+		// ej2.creaClasificacion2("ficheros/partidos.txt");
+		String[] equipos = { "RMA", "BCNA", "UDLP", "ALA", "RSO", "BET", "EIB", "ATM", "ATB", "SEV", "VIL", "ESP",
+				"CEL", "VAL", "DEP", "MLG", "LEG", "GRA", "SPO", "OSA" };
+		ej2.creaPartidosTodos("ficheros/partidosTodos.txt", equipos);
+		HashMap<String, Integer> clasificacion =ej2.creaClasificacion("ficheros/partidosTodos.txt");
+		System.exit(0);
+		// ej2.insertarEnPersonas();
+		for (;;) { // while(true)
+			System.out.println(titulo);
+			System.out.println("\t\t1. Gestión de lista");
+			System.out.println("\t\t2. Gestión de mapa");
+
+			System.out.println("\t\t0. Salir del programa");
+			String tecleado = teclado.nextLine();
+
+			try {
+				int opcion = 0;
+				opcion = Integer.parseInt(tecleado);
+				switch (opcion) {
+				case 1:
+					menuList("Gestión de ArrayList");
+					break;
+				case 2:
+					menuMap("Gestión de HashMap");
+					break;
+				case 0:
+					return; // salida del menú
+				default:
+					break;
+				}
+			} catch (NumberFormatException e) {
+				// entra por aqui si se equivoca y teclea un valor no entero
+			}
+		}
+	}
+
+	public void menuList(String titulo) {
 		Ejercicios2 ej2 = new Ejercicios2();
 		ej2.insertarEnPersonas();
-		for (;;) {
+		for (;;) { // while(true)
 			System.out.println(titulo);
 			System.out.println("\t\t1. Listar todas las personas");
 			System.out.println("\t\t2. Crear una persona");
 			System.out.println("\t\t3. Modificar datos de una persona (NIF)");
-			System.out.println("\t\t4. Borrar una persona de la lista por ID");
-			System.out.println("\t\t5. Borrar una persona de la lista por NIF");
-			System.out.println("\t\t0. Salir del programa");
-
+			System.out.println("\t\t4. Eliminar una persona de la lista (ID)");
+			System.out.println("\t\t5. Eliminar una persona de la lista (NIF)");
+			System.out.println("\t\t0. Volver al menú anterior1");
 			String tecleado = teclado.nextLine();
+
 			try {
-				int opcion = Integer.parseInt(tecleado);
+				int opcion = 0;
+				opcion = Integer.parseInt(tecleado);
 				switch (opcion) {
 				case 1:
 					ej2.recorrerListaPersonas2();
+					// listarTodos();
 					break;
 				case 2:
 					ej2.crearPersona();
@@ -64,50 +103,71 @@ public class Ejercicios1 {
 					ej2.borrarPersonaNif();
 					break;
 				case 0:
-					return;
-
+					return; // salida del menú
 				default:
 					break;
 				}
 			} catch (NumberFormatException e) {
-
+				// entra por aqui si se equivoca y teclea un valor no entero
 			}
-			// salida del break
+		}
+
+	}
+
+	public void menuMap(String titulo) {
+		Ejercicios2 ej2 = new Ejercicios2();
+		ej2.insertarEnMapaPersonas();
+
+		for (;;) { // while(true)
+			System.out.println(titulo);
+			System.out.println("\t\t1. Listar todas las personas");
+			System.out.println("\t\t2. Crear una persona");
+			System.out.println("\t\t3. Modificar datos de una persona (NIF)");
+			System.out.println("\t\t4. Eliminar una persona de la lista (ID)");
+			System.out.println("\t\t5. Eliminar una persona de la lista (NIF)");
+			System.out.println("\t\t0. Volver al menu anterior");
+			String tecleado = teclado.nextLine();
+
+			try {
+				int opcion = 0;
+				opcion = Integer.parseInt(tecleado);
+				switch (opcion) {
+				case 1:
+					ej2.recorrerMapa(ej2.getmPersonas());
+					break;
+				case 2:
+					ej2.crearPersonaEnMapa(ej2.getmPersonas());
+					break;
+				case 3:
+					ej2.modificarPersona();
+					break;
+				case 4:
+					ej2.borrarPersonaIdEnMapa(ej2.getmPersonas());
+					break;
+				case 5:
+					ej2.borrarPersonaNif();
+					break;
+				case 0:
+					return; // salida del menú
+				default:
+					break;
+				}
+			} catch (NumberFormatException e) {
+				// entra por aqui si se equivoca y teclea un valor no entero
+			}
 		}
 
 	}
 
 	public void modificarPersona() {
-		System.out.println("\t modificarPersona");
+		System.out.println("modificarPersona");
 	}
 
-	public String[] ordenaListaCaracteres(String[] palabra) {
-		for (int i = 0; i < palabra.length - 1; i++) {
-			for (int j = i + 1; j < palabra.length; j++) {
-				if (palabra[i].compareTo(palabra[j]) > 0) // hay que permutar
-				{
-					String aux = palabra[i];
-					palabra[i] = palabra[j];
-					palabra[j] = aux;
-				}
-			}
-		}
-
-		return palabra;
-
+	public void borrarPersona() {
+		System.out.println("borrarPersona");
 	}
 
-	public int calculaSaldoFinal(int[] movimientoCuenta, int saldoInicial) {
-		int saldoFinal = saldoInicial;
-		for (int i = 0; i < movimientoCuenta.length; i++) {
-			saldoFinal += movimientoCuenta[i];
-		}
-
-		return saldoFinal;
-
-	}
-
-	public int[] sumaFilaMatrizEnteros(int[][] matriz) {
+	public int[] sumaFilasMatrizEnteros(int[][] matriz) {
 		int[] resultado = new int[matriz.length];
 		for (int i = 0; i < matriz.length; i++) {
 			for (int j = 0; j < matriz[i].length; j++) {
@@ -118,45 +178,45 @@ public class Ejercicios1 {
 	}
 
 	public int[] sumaColumnasMatrizEnteros(int[][] matriz) {
-		int longitud = 0;
-
+		// calculamos el número máximo de columnas
+		int numMaxColumnas = 0;
 		for (int i = 0; i < matriz.length; i++) {
-			if (matriz[i].length > longitud)
-				longitud = matriz[i].length;
-
+			if (matriz[i].length > numMaxColumnas)
+				numMaxColumnas = matriz[i].length;
 		}
-		int[] resultado = new int[longitud];
-		for (int j = 0; j < longitud; j++) {
+
+		// recorremos la matriz por COLUMNAS.
+		int[] resultado = new int[numMaxColumnas];
+
+		for (int j = 0; j < numMaxColumnas; j++) {
 			for (int i = 0; i < matriz.length; i++) {
 				// try {
 				if (j < matriz[i].length)
 					resultado[j] += matriz[i][j];
-				// } catch (ArrayIndexOutOfBoundsException e) {
-				// System.out.println(i + ", " + j);
-
-				// }
+				/*
+				 * } catch (ArrayIndexOutOfBoundsException e) {
+				 * 
+				 * }
+				 */
 			}
 		}
-
 		return resultado;
-
 	}
 
 	public int sumaMatrizEnteros(int[][] matriz) {
 		int suma = 0;
 		for (int i = 0; i < matriz.length; i++) {
-			for (int j = 0; j < matriz[i].length; j++) {
+			for (int j = 0; j < matriz[i].length; j++)
 				suma += matriz[i][j];
-			}
 		}
 		return suma;
 	}
 
-	public int[] mezclaArraysEnteros(int[] a1, int[] a2) {
+	public int[] mezclaArrayEnteros(int[] a1, int[] a2) {
+
 		int[] a3 = new int[a1.length + a2.length];
 		int i = 0, j = 0, k = 0;
 		while (k < a3.length) {
-
 			try {
 				if (a1[i] < a2[j]) {
 					a3[k] = a1[i];
@@ -166,7 +226,7 @@ public class Ejercicios1 {
 					j++;
 				}
 				k++;
-			} catch (ArrayIndexOutOfBoundsException exepcion) {
+			} catch (ArrayIndexOutOfBoundsException excepcion) {
 				if (i >= a1.length) {
 					a1[a1.length - 1] = Integer.MAX_VALUE;
 					i--;
@@ -174,33 +234,28 @@ public class Ejercicios1 {
 					a2[a2.length - 1] = Integer.MAX_VALUE;
 					j--;
 				}
-
 			}
 		}
-
 		return a3;
-
 	}
 
-	public boolean busquedaBinaria(int buscame, int[] enDonde) {
-		int min = 0;
-		int max = enDonde.length - 1;
-		int med;
-
+	public boolean busquedaBinaria(int buscaMe, int[] enDonde) {
+		int min, max, med;
+		min = 0;
+		max = enDonde.length - 1;
 		while (min <= max) {
 			med = min + (max - min) / 2;
-			if (enDonde[med] == buscame)
+			if (enDonde[med] == buscaMe)
 				return true;
-			else if (enDonde[med] > buscame)
+			else if (enDonde[med] > buscaMe)
 				max = med - 1;
 			else
 				min = med + 1;
 		}
 		return false;
-
 	}
 
-	public void ordenaListaNumerosEnteros(int[] lista) {
+	public void ordenaListaNumeros(int[] lista) {
 		for (int i = 0; i < lista.length - 1; i++) {
 			for (int j = i + 1; j < lista.length; j++) {
 				if (lista[i] > (lista[j])) // hay que permutar
@@ -211,13 +266,10 @@ public class Ejercicios1 {
 				}
 			}
 		}
-
-		// return lista;
-
 	}
 
-	// public String[] ordenaListaCadenas(String[] lista) {
 	public void ordenaListaCadenas(String[] lista) {
+		// public String[] ordenaListaCadenas(String[] lista) {
 		for (int i = 0; i < lista.length - 1; i++) {
 			for (int j = i + 1; j < lista.length; j++) {
 				if (lista[i].compareTo(lista[j]) > 0) // hay que permutar
@@ -364,13 +416,13 @@ public class Ejercicios1 {
 
 	public void creaListaPersonas() {
 		// crea 3 personas
-		Persona p1 = new Persona("45627812K", "Carlos", 'M', 19830323);
+		Persona p1 = new Persona("45627812K", "Carlos", 'M', 19801109);
 		Persona p2 = new Persona();
 		p2.setNif("44321987H");
 		p2.setNombre("Maria");
 		p2.setSexo('F');
 
-		Persona p3 = new Persona("41298730L", "Felipe", 'M', 19761203);
+		Persona p3 = new Persona("41298730L", "Felipe", 'M', 19811129);
 
 		// define el array para 20 personas
 		Persona[] listaPersonas = new Persona[20];
@@ -495,6 +547,7 @@ public class Ejercicios1 {
 					try {
 						Thread.sleep(1000);
 					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 
